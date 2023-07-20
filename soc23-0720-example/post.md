@@ -699,5 +699,100 @@ Due to the factory function the code here is simpler than the code on the first 
 [end of listing]
 ```
 
+## Container code is the same for all cases ##    
+### `container.h ###    
+```C
+#pragma once
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "item2.h"
+
+typedef struct
+{
+    size_t limit;             // capacity
+    size_t size;              // actual size
+    Item** item;              // an array of pointers to items
+    Item* (*copy)(Item*);     // copy
+    Item* (*destroy)(Item*);  // destructor
+    int (*show)(Item*);       // print
+} Container;                  // a collection
+
+Container* ctn_create(
+    size_t, Item* (*copy)(Item*), Item* (*destroy)(Item*),
+    int (*show)(Item*));
+Container* ctn_destroy(Container*);
+int        ctn_insert(Item*, Container*);
+int        ctn_show(Container*);
+```
+
+### `container.c` ###    
+
+``` C
+#pragma once
+#include "container.h"
+
+Container* ctn_create(
+    size_t size, Item* (*copy)(Item*),
+    Item* (*destroy)(Item*), int (*show)(Item*))
+{
+    Container* ctn =
+        (Container*)malloc(sizeof(Container) * size);
+    if (ctn == NULL) return NULL;
+    ctn->limit = size;  // limit
+    ctn->size  = 0;     // now empty, of course
+    ctn->item  = (Item**)malloc(size * sizeof(void*));
+    if (ctn->item == NULL)
+    {  // could not allocate
+        free(ctn);
+        return NULL;
+    }
+    ctn->copy    = copy;
+    ctn->destroy = destroy;
+    ctn->show    = show;
+    return ctn;
+}
+
+Container* ctn_destroy(Container* ctn)
+{  // to destroy a container we need to know how to
+    // delete the items: they can allocate memory
+    if (ctn == NULL) return NULL;
+    for (size_t ix = 0; ix < ctn->size; ix += 1)
+        ctn->destroy(ctn->item[ix]);
+    return NULL;
+}
+
+int ctn_insert(Item* item, Container* ctn)
+{  // it is not wise to insert just a pointer
+    // that can be free'd elsewhere:
+    // it must be a copy. But an item can allocate
+    // memory so we need to rely on user supplied
+    // method
+    if (item == NULL) return -1;       // no item
+    if (ctn == NULL) return -2;        // no container
+    if (ctn->size == ctn->limit)
+        return -3;                     // container full
+    if (ctn->copy == NULL) return -4;  // no copy function
+    ctn->item[ctn->size] = ctn->copy(item);
+    if (ctn->item[ctn->size] == NULL)
+        return -5;  // error on copy
+    ctn->size += 1;
+    return 0;
+}
+
+int ctn_show(Container* col)
+{
+    if (col == NULL) return -1;
+    printf(
+        "    there are %llu of %llu items\n\n", col->size,
+        col->limit);
+    if (col->show == NULL) return -1;  // no show function
+    for (size_t i = 0; i < col->size; i += 1)
+        col->show(col->item[i]);
+    printf("[end of listing]\n");
+    return 0;
+}
+```
+
 Code is on https://github.com/ARFNeto-CH/soc23-0720-example 
 
