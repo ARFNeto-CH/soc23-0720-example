@@ -464,9 +464,11 @@ Note 1:
     printf("\n\t***** now print again changing layout\n\n");
     books->show = print_book_alt;
     ctn_show(books);             // now using _alt
-```
+```  
+The point of using `books->show` here is that it encapsulates behavior, as an object in `Python` or `java` or `C++`: by changing this, the next call to `cnt_show` inherits the new print layout    
 
-Note 2:
+Note 2:    
+
 ```C
     books = ctn_destroy(books);  // delete all
     ctn_show(books);             // now empty
@@ -474,7 +476,6 @@ Note 2:
 
 By returning `NULL` from `cnt_destroy` the pointer of the container is invalidaded in the same line of code. This is great, so the call to `ctn->show` on the next line will never get an invalid pointer.
 
-The point of using `books->show` here is that it encapsulates behavior, as an object in `Python` or `java` or `C++`: by changing this, the next call to `cnt_show` inherits the new print layout
 
 ### output for test 1 ###    
 
@@ -545,9 +546,13 @@ Book* create_book(void);
 Book* delete_book(Book*);
 ```
 
-Now title and author are `char*` so memory must be allocated in the copy function and free'd on delete...
+Now `title` and `author` are `char*` so memory must be allocated in the copy function and free'd on delete...
 
-### `item.c` a second implementation ###    
+For no reason each `book` now has a `n_pages` field also.
+
+By keeping code from item and container separated the code from container need not to be changed
+
+### `item.c` a second implementation, using pointers ###    
 
 ```C
 #include <stdlib.h>
@@ -692,9 +697,7 @@ Due to the factory function the code here is simpler than the code on the first 
     1004, "Title 1004 [304 pages]", [Author 1004]
     1005, "Title 1005 [269 pages]", [Author 1005]
 [end of listing]
-
-C:\Users\toninho\source\repos\soc23-0720-example\x64\Release\Example2.exe (process 19136) exited with code 0.
-Press any key to close this window . . .
 ```
 
+Code is on https://github.com/ARFNeto-CH/soc23-0720-example 
 
