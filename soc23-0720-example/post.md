@@ -700,7 +700,7 @@ Due to the factory function the code here is simpler than the code on the first 
 ```
 
 ## Container code is the same for all cases ##    
-### `container.h ###    
+### `container.h` ###    
 ```C
 #pragma once
 #include <stdio.h>
@@ -728,7 +728,7 @@ int        ctn_show(Container*);
 
 ### `container.c` ###    
 
-``` C
+```C
 #pragma once
 #include "container.h"
 
