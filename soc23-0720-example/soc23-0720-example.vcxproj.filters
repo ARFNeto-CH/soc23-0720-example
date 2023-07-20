@@ -15,37 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="container.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="item2.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="item1.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main1.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main2.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="container.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="item2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="item1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="post.md" />
   </ItemGroup>
 </Project>
