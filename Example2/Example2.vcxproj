@@ -18,19 +18,10 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="container.c" />
-    <ClCompile Include="item2.c" />
-    <ClCompile Include="main2.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="container.h" />
-    <ClInclude Include="item2.h" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{cdb0296f-0650-4ce7-ade3-21929c2770e8}</ProjectGuid>
+    <ProjectGuid>{ae0a45fa-89f3-4ce2-b75e-23d56b7c7717}</ProjectGuid>
     <RootNamespace>Example2</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -135,6 +126,15 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="container.c" />
+    <ClCompile Include="item2.c" />
+    <ClCompile Include="main2.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="container.h" />
+    <ClInclude Include="item2.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
